@@ -66,6 +66,7 @@ public class ApiAssertions {
 
     @Step("Проверить запрет создания заказа без авторизации согласно странице 5 PDF")
     public static void assertUnauthorizedOrder(Response response) {
+        // тест падает потому что нет валидации на авторизацию, ожидаем 401 без авторизации, но ответ 200
         assertThat(response.statusCode()).as("Создание заказа требует авторизации (PDF, стр. 5)")
                 .isEqualTo(HttpStatus.SC_UNAUTHORIZED);
         assertThat(response.jsonPath().getBoolean("success")).as("Заказ не создан").isFalse();
